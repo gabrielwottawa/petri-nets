@@ -143,7 +143,7 @@ namespace PetriNets.Controller
         public void ClearPlace(int id)
         {
             var place = GetPlace(id);
-            if (place != null)                
+            if (place != null)
                 place.ConsumeAllTokens();
         }
 
@@ -179,7 +179,14 @@ namespace PetriNets.Controller
             }
 
             CurrentCycle++;
-            return false;
+            return true;
+        }
+
+        public void ExecuteAllCycles()
+        {
+            var execute = true;
+            while (execute)
+                execute = ExecuteCycle();
         }
     }
 }
