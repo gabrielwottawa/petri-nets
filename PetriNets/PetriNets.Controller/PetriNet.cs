@@ -1,4 +1,5 @@
 ﻿using PetriNets.Controller.Entities;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -10,6 +11,8 @@ namespace PetriNets.Controller
         public List<Place> Places { get; set; } = new();
         public List<Transition> Transitions { get; set; } = new();
         public List<Connection> Connections { get; set; } = new();
+
+        public Dictionary<string, string> PlaceAndTransitionsGrid => getPlaceAndTransitions();
 
         public bool CreatePlace(int id, int qtyTokens = 0)
         {
@@ -187,6 +190,14 @@ namespace PetriNets.Controller
             var execute = true;
             while (execute)
                 execute = ExecuteCycle();
+        }
+
+        private Dictionary<string, string> getPlaceAndTransitions()
+        {
+            var places = Places.ToDictionary(el => $"L{el.Id}", el => $"{el.Tokens}");
+            var transitions = Transitions.ToDictionary(el => $"T{el.Id}", el => el.IsEnabled ? "S" : "N");
+
+            return places.Concat(transitions).ToDictionary(el => el.Key, el => el.Value);
         }
     }
 }
