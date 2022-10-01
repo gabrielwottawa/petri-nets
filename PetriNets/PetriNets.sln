@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetriNets.Forms", "PetriNets\PetriNets.Forms.csproj", "{F3987B17-866E-434D-A79F-ECFAB3939CDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetriNets.Forms", "PetriNets.Forms\PetriNets.Forms.csproj", "{F3987B17-866E-434D-A79F-ECFAB3939CDF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetriNets.Controller", "PetriNets.Controller\PetriNets.Controller.csproj", "{DDB63161-DCEB-4BF5-AEE0-62DE8B80F855}"
 EndProject
