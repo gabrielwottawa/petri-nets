@@ -1,9 +1,12 @@
 ﻿using PetriNets.Controller.Entities;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace PetriNets.Controller
 {
     public class PetriNet
     {
+        public int CurrentCycle { get; private set; } = 0;
         public List<Place> Places { get; set; } = new();
         public List<Transition> Transitions { get; set; } = new();
         public List<Connection> Connections { get; set; } = new();
@@ -108,17 +111,11 @@ namespace PetriNets.Controller
 
         public Connection? GetConnection(Place place, Transition transition) => Connections.Where(el => el.Place?.Id == place.Id && el.Transition?.Id == transition.Id).FirstOrDefault();
 
-        public Place? GetConnectionPlace(Connection connection)
-        {
-            return null;
-        }
+        public Place? GetConnectionPlace(Connection connection) => connection.Place;
 
-        public Transition? GetConnectionTransition(Connection connection)
-        {
-            return null;
-        }
+        public Transition? GetConnectionTransition(Connection connection) => connection.Transition;
 
-        public List<Connection> GetEntryConnections(int id) => GetTransition(id)?.InputConnections ?? new();        
+        public List<Connection> GetEntryConnections(int id) => GetTransition(id)?.InputConnections ?? new();
 
         public List<Connection> GetExitConnections(int id) => GetTransition(id)?.OutputConnections ?? new();
 
@@ -127,7 +124,7 @@ namespace PetriNets.Controller
             var netPlace = GetPlace(id);
             if (netPlace == null)
                 return false;
-            
+
             netPlace.ProduceToken(qty);
             return true;
         }
@@ -142,13 +139,46 @@ namespace PetriNets.Controller
             return true;
         }
 
-        public void ClearPlace(Place place)
-        {
 
+        public void ClearPlace(int id)
+        {
+            var place = GetPlace(id);
+            if (place != null)                
+                place.ConsumeAllTokens();
         }
 
-        public bool ExecuteCicle()
+        public int CountTokens(int id)
         {
+            var place = GetPlace(id);
+            if (place != null)
+                return place.Tokens;
+
+            return 0;
+        }
+
+        public bool GetStatusTransition(int id)
+        {
+            var transition = GetTransition(id);
+            if (transition != null)
+                return transition.IsEnabled;
+
+            return false;
+        }
+
+        public bool ExecuteCycle()
+        {
+            var transitions = Transitions.Where(el => el.IsEnabled).ToList();
+
+            if (!transitions.Any())
+                return false;
+
+            foreach (var transition in transitions)
+            {
+                while (transition.IsEnabled)
+                    transition.ExecuteTransition();
+            }
+
+            CurrentCycle++;
             return false;
         }
     }

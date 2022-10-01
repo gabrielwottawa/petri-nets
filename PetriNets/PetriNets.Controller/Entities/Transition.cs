@@ -19,8 +19,13 @@ namespace PetriNets.Controller.Entities
 
         public void ExecuteTransition()
         {
+            foreach(var connection in InputConnections)
+                connection.ConsumeTokens();
+
+            foreach (var connection in OutputConnections)
+                connection.Place?.ProduceToken(connection.Weight);
         }
 
-        private bool tokenIsEnabled() => InputConnections.All(el => el.IsEnabled);
+        private bool tokenIsEnabled() => InputConnections.Any() && InputConnections.All(el => el.IsEnabled);
     }
 }
