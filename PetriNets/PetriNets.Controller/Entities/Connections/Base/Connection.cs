@@ -8,11 +8,14 @@
 
         public int Weight { get; private set; } = 1;
 
+        public ConnectionDirection Direction { get; private set; }
+
         public Connection(ConnectionData data)
         {
             Place = data.Place;
             Transition = data.Transition;
             Weight = data.Weight;
+            Direction = data.Direction;
         }
     }
 }

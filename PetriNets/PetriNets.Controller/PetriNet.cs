@@ -13,7 +13,7 @@ namespace PetriNets.Controller
             if (GetPlace(id) != null)
                 return false;
 
-            var place = new Place(id);
+            var place = new Place(id, qtyTokens);
             Places.Add(place);
             return true;
         }
@@ -52,9 +52,9 @@ namespace PetriNets.Controller
             return true;
         }
 
-        public bool CreateConnection(Place place, Transition transition, int weight, ConnectionType connectionType)
+        public bool CreateConnection(Place place, Transition transition, int weight, ConnectionType connectionType, ConnectionDirection direction)
         {
-            var data = new ConnectionData(place, transition, weight);
+            var data = new ConnectionData(place, transition, weight, direction);
             var connection = ConnectionFactory.Create(connectionType, data);
 
             if (connection != null)
@@ -96,7 +96,7 @@ namespace PetriNets.Controller
 
         public void AddTokens(int qty, Place place)
         {
-
+            
         }
 
         public bool RemoveTokenFromPlace(Token token, Place place)
@@ -107,6 +107,11 @@ namespace PetriNets.Controller
         public void ClearPlace(Place place)
         {
 
+        }
+
+        public bool ExecuteCicle()
+        {
+            return false;
         }
     }
 }
