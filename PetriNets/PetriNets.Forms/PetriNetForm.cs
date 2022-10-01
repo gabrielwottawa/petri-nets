@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PetriNets.Controller;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,9 +11,11 @@ using System.Windows.Forms;
 
 namespace PetriNets.Forms
 {
-    public partial class PetriNet : Form
+    public partial class PetriNetForm : Form
     {
-        public PetriNet()
+        private PetriNet petriNet = new PetriNet();
+
+        public PetriNetForm()
         {
             InitializeComponent();
             //this.WindowState = FormWindowState.Maximized;

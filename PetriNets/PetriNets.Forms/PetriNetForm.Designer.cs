@@ -1,6 +1,6 @@
 ﻿namespace PetriNets.Forms
 {
-    partial class PetriNet
+    partial class PetriNetForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.MarkPlace_NumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.CretePlace_Button = new System.Windows.Forms.Button();
@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.IdPlace_TextBox = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.Clear_Button = new System.Windows.Forms.Button();
             this.RunCycle_Button = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.CreateTransition_Button = new System.Windows.Forms.Button();
@@ -154,23 +155,37 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.Clear_Button);
             this.groupBox5.Controls.Add(this.RunCycle_Button);
             this.groupBox5.Controls.Add(this.groupBox2);
             this.groupBox5.Controls.Add(this.groupBox1);
             this.groupBox5.Controls.Add(this.groupBox6);
             this.groupBox5.Location = new System.Drawing.Point(32, 24);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(375, 971);
+            this.groupBox5.Size = new System.Drawing.Size(373, 971);
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
             // 
+            // Clear_Button
+            // 
+            this.Clear_Button.BackColor = System.Drawing.Color.Tomato;
+            this.Clear_Button.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Clear_Button.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Clear_Button.Location = new System.Drawing.Point(191, 920);
+            this.Clear_Button.Name = "Clear_Button";
+            this.Clear_Button.Size = new System.Drawing.Size(167, 39);
+            this.Clear_Button.TabIndex = 25;
+            this.Clear_Button.Text = "Limpar";
+            this.Clear_Button.UseVisualStyleBackColor = false;
+            // 
             // RunCycle_Button
             // 
-            this.RunCycle_Button.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.RunCycle_Button.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.RunCycle_Button.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.RunCycle_Button.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.RunCycle_Button.Location = new System.Drawing.Point(18, 920);
             this.RunCycle_Button.Name = "RunCycle_Button";
-            this.RunCycle_Button.Size = new System.Drawing.Size(340, 39);
+            this.RunCycle_Button.Size = new System.Drawing.Size(167, 39);
             this.RunCycle_Button.TabIndex = 24;
             this.RunCycle_Button.Text = "Executar Ciclo";
             this.RunCycle_Button.UseVisualStyleBackColor = false;
@@ -245,9 +260,9 @@
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.groupBox4.ForeColor = System.Drawing.Color.Black;
-            this.groupBox4.Location = new System.Drawing.Point(10, 310);
+            this.groupBox4.Location = new System.Drawing.Point(18, 310);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(315, 200);
+            this.groupBox4.Size = new System.Drawing.Size(307, 200);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Transição -> Lugar";
@@ -341,9 +356,9 @@
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.groupBox3.ForeColor = System.Drawing.Color.Black;
-            this.groupBox3.Location = new System.Drawing.Point(10, 57);
+            this.groupBox3.Location = new System.Drawing.Point(18, 57);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(315, 235);
+            this.groupBox3.Size = new System.Drawing.Size(307, 235);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Lugar -> Transição";
@@ -372,7 +387,7 @@
             this.ConnIdPlace_PlaceTrasition_ComboBox.FormattingEnabled = true;
             this.ConnIdPlace_PlaceTrasition_ComboBox.Location = new System.Drawing.Point(137, 37);
             this.ConnIdPlace_PlaceTrasition_ComboBox.Name = "ConnIdPlace_PlaceTrasition_ComboBox";
-            this.ConnIdPlace_PlaceTrasition_ComboBox.Size = new System.Drawing.Size(164, 29);
+            this.ConnIdPlace_PlaceTrasition_ComboBox.Size = new System.Drawing.Size(156, 29);
             this.ConnIdPlace_PlaceTrasition_ComboBox.TabIndex = 5;
             // 
             // ConnCreate_PlaceTrasition_Button
@@ -453,34 +468,34 @@
             // DataGridView
             // 
             this.DataGridView.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DataGridView.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.DataGridView.GridColor = System.Drawing.SystemColors.ActiveCaption;
             this.DataGridView.Location = new System.Drawing.Point(6, 491);
             this.DataGridView.Name = "DataGridView";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.DataGridView.RowTemplate.Height = 25;
             this.DataGridView.Size = new System.Drawing.Size(1457, 472);
             this.DataGridView.TabIndex = 1;
@@ -560,5 +575,6 @@
         private DataGridView DataGridView;
         private ListView Connections_ListView;
         private Button RunCycle_Button;
+        private Button Clear_Button;
     }
 }
