@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace PetriNets.Controller
 {
@@ -198,6 +199,15 @@ namespace PetriNets.Controller
             var transitions = Transitions.ToDictionary(el => $"T{el.Id}", el => el.IsEnabled ? "S" : "N");
 
             return places.Concat(transitions).ToDictionary(el => el.Key, el => el.Value);
+        }
+
+        public string GetConnectionsInfo()
+        {
+            var builder = new StringBuilder();
+            foreach (var connection in Connections)
+                builder.AppendLine(connection?.ToString() ?? "");
+
+            return builder.ToString();
         }
     }
 }
