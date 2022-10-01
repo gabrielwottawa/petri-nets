@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetriNets.Forms", "PetriNets\PetriNets.Forms.csproj", "{F3987B17-866E-434D-A79F-ECFAB3939CDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetriNets.Forms", "PetriNets\PetriNets.Forms.csproj", "{F3987B17-866E-434D-A79F-ECFAB3939CDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetriNets.Controller", "PetriNets.Controller\PetriNets.Controller.csproj", "{DDB63161-DCEB-4BF5-AEE0-62DE8B80F855}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F3987B17-866E-434D-A79F-ECFAB3939CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3987B17-866E-434D-A79F-ECFAB3939CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3987B17-866E-434D-A79F-ECFAB3939CDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDB63161-DCEB-4BF5-AEE0-62DE8B80F855}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDB63161-DCEB-4BF5-AEE0-62DE8B80F855}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDB63161-DCEB-4BF5-AEE0-62DE8B80F855}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDB63161-DCEB-4BF5-AEE0-62DE8B80F855}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

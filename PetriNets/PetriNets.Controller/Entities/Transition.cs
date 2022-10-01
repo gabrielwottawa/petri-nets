@@ -12,10 +12,10 @@ namespace PetriNets.Controller.Entities
 
         public Transition(int id) : base(id)
         {
-        }        
+        }
 
         public void ExecuteTransition()
-        {            
+        {
         }
     }
 }
