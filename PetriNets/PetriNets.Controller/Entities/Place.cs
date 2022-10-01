@@ -23,6 +23,8 @@ namespace PetriNets.Controller.Entities
             Tokens -= quantity;
         }
 
+        public void ConsumeAllTokens() => ConsumeToken(Tokens);
+
         public void ProduceToken(int quantity)
         {
             Tokens += quantity;

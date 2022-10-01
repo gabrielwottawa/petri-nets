@@ -7,7 +7,7 @@
         public int Weight { get; private set; } = 1;
         public ConnectionDirection Direction { get; private set; }
 
-        public ConnectionData(Place? place, Transition? transition, int weight = 1, ConnectionDirection direction = ConnectionDirection.Entry)
+        public ConnectionData(Place? place, Transition? transition, int weight = 1, ConnectionDirection direction = ConnectionDirection.Input)
         {
             Place = place;
             Transition = transition;

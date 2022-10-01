@@ -58,18 +58,52 @@ namespace PetriNets.Controller
             var connection = ConnectionFactory.Create(connectionType, data);
 
             if (connection != null)
+            {
                 Connections.Add(connection);
-            return true;
+                insertTransitionConnection(transition, direction, connection);
+                return true;
+            }
+
+            return false;
         }
 
-        public bool RemoveConnection(Place place, Transition transition)
+        private static void insertTransitionConnection(Transition transition, ConnectionDirection direction, Connection connection)
+        {
+            switch (direction)
+            {
+                case ConnectionDirection.Input:
+                    transition.InputConnections.Add(connection);
+                    break;
+
+                case ConnectionDirection.Output:
+                    transition.OutputConnections.Add(connection);
+                    break;
+            }
+        }
+
+        public bool RemoveConnection(Place place, Transition transition, ConnectionDirection direction)
         {
             var connection = GetConnection(place, transition);
             if (connection == null)
                 return false;
 
             Connections.Remove(connection);
+            removeTransitionConnection(transition, direction, connection);
             return true;
+        }
+
+        private static void removeTransitionConnection(Transition transition, ConnectionDirection direction, Connection connection)
+        {
+            switch (direction)
+            {
+                case ConnectionDirection.Input:
+                    transition.InputConnections.Remove(connection);
+                    break;
+
+                case ConnectionDirection.Output:
+                    transition.OutputConnections.Remove(connection);
+                    break;
+            }
         }
 
         public Connection? GetConnection(Place place, Transition transition) => Connections.Where(el => el.Place?.Id == place.Id && el.Transition?.Id == transition.Id).FirstOrDefault();
@@ -84,24 +118,28 @@ namespace PetriNets.Controller
             return null;
         }
 
-        public List<Connection> GetEntryConnections(int id)
-        {
-            return new List<Connection>();
-        }
+        public List<Connection> GetEntryConnections(int id) => GetTransition(id)?.InputConnections ?? new();        
 
-        public List<Connection> GetExitConnections(int id)
-        {
-            return new List<Connection>();
-        }
+        public List<Connection> GetExitConnections(int id) => GetTransition(id)?.OutputConnections ?? new();
 
-        public void AddTokens(int qty, Place place)
+        public bool AddTokens(int qty, int id)
         {
+            var netPlace = GetPlace(id);
+            if (netPlace == null)
+                return false;
             
+            netPlace.ProduceToken(qty);
+            return true;
         }
 
-        public bool RemoveTokenFromPlace(Token token, Place place)
+        public bool RemoveTokenFromPlace(int qty, int id)
         {
-            return false;
+            var netPlace = GetPlace(id);
+            if (netPlace == null)
+                return false;
+
+            netPlace.ConsumeToken(qty);
+            return true;
         }
 
         public void ClearPlace(Place place)

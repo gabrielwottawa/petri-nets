@@ -2,7 +2,7 @@
 {
     public enum ConnectionDirection
     {
-        Entry,
-        Exit
+        Input,
+        Output
     }
 }
