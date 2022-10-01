@@ -1,4 +1,4 @@
-﻿namespace PetriNets
+﻿namespace PetriNets.Forms
 {
     partial class PetriNet
     {
@@ -36,12 +36,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Yellow;
             this.groupBox1.Location = new System.Drawing.Point(12, 31);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(310, 133);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Lugar";
+            this.groupBox1.Text = "LUGAR";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // groupBox2
@@ -51,7 +52,7 @@
             this.groupBox2.Size = new System.Drawing.Size(310, 133);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.groupBox2.Text = "TRANSIÇÃO";
             // 
             // groupBox3
             // 
@@ -60,7 +61,7 @@
             this.groupBox3.Size = new System.Drawing.Size(310, 133);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox3";
+            this.groupBox3.Text = "Lugar -> Transição";
             // 
             // groupBox4
             // 
@@ -69,13 +70,14 @@
             this.groupBox4.Size = new System.Drawing.Size(310, 133);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "groupBox4";
+            this.groupBox4.Text = "Transição -> Lugar";
             this.groupBox4.Enter += new System.EventHandler(this.groupBox4_Enter);
             // 
             // PetriNet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(1554, 823);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);

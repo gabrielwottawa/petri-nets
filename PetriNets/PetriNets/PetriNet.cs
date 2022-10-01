@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PetriNets
+namespace PetriNets.Forms
 {
     public partial class PetriNet : Form
     {

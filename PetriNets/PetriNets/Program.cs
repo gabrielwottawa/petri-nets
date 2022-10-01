@@ -1,4 +1,4 @@
-namespace PetriNets
+namespace PetriNets.Forms
 {
     internal static class Program
     {
