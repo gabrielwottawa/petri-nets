@@ -9,7 +9,7 @@ namespace PetriNets.Controller.Entities
     public enum ConnectionType
     {
         Normal, 
-        Inhibitor, 
+        Inibidor, 
         Reset
     }
 }

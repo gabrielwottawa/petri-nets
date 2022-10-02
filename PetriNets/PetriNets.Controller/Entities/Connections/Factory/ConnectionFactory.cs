@@ -15,7 +15,7 @@ namespace PetriNets.Controller.Entities
                 case ConnectionType.Normal:
                     return new NormalConnection(data);
 
-                case ConnectionType.Inhibitor:
+                case ConnectionType.Inibidor:
                     return new InhibitorConnection(data);
 
                 case ConnectionType.Reset:

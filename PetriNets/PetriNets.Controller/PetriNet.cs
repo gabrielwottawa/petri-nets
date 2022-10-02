@@ -186,13 +186,6 @@ namespace PetriNets.Controller
             return true;
         }
 
-        public void ExecuteAllCycles()
-        {
-            var execute = true;
-            while (execute)
-                execute = ExecuteCycle();
-        }
-
         private Dictionary<string, string> getPlaceAndTransitions()
         {
             var places = Places.ToDictionary(el => $"L{el.Id}", el => $"{el.Tokens}");

@@ -1,4 +1,5 @@
 ﻿using PetriNets.Controller;
+using PetriNets.Controller.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,82 +19,215 @@ namespace PetriNets.Forms
         public PetriNetForm()
         {
             InitializeComponent();
-            //this.WindowState = FormWindowState.Maximized;
+            this.WindowState = FormWindowState.Maximized;
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void petriNet_Load(object sender, EventArgs e)
         {
+            ConnType_PlaceTrasition_ComboBox.DataSource = new BindingList<ConnectionType>(new[] {
+                ConnectionType.Normal
+                ,ConnectionType.Inibidor
+                ,ConnectionType.Reset
+            });
 
+            loadPetriNetScreen();
         }
 
-        private void groupBox4_Enter(object sender, EventArgs e)
+        private void loadPetriNetScreen()
         {
+            laodPlaceToTransition();
+            loadTransitionToPlace();
 
+            //mostra itens da tabela
+            drawTable();
+
+            //mostra conexoes da rede
+            updateConnections();                        
         }
 
-        private void PetriNet_Load(object sender, EventArgs e)
+        private void loadTransitionToPlace()
         {
-
+            ConnIdPlace_TrasitionPlace_ComboBox.DataSource = petriNet.Places.Select(x => x.Id).ToList();
+            ConnIdTransition_TrasitionPlace_ComboBox.DataSource = petriNet.Transitions.Select(x => x.Id).ToList();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void laodPlaceToTransition()
         {
-            //MessageBox.Show(this.Width.ToString() + " x " + this.Height.ToString());
+            ConnIdPlace_PlaceTrasition_ComboBox.DataSource = petriNet.Places.Select(x => x.Id).ToList();
+            ConnIdTransition_PlaceTrasition_ComboBox.DataSource = petriNet.Transitions.Select(x => x.Id).ToList();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void updateConnections()
         {
-
+            Connections_Label.Text = petriNet.GetConnectionsInfo();
+            RunCycle_Button.Enabled = true;
+            RunAllCycle_Button.Enabled = true;
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void drawTable()
         {
-
+            clearGrid();
+            createTable();
         }
 
-        private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
+        private void clearComponents()
         {
-
+            Connections_Label.Text = " ";
+            ConnIdPlace_PlaceTrasition_ComboBox.DataSource = null;
+            ConnIdTransition_TrasitionPlace_ComboBox.DataSource = null;
+            ConnIdPlace_TrasitionPlace_ComboBox.DataSource = null;
+            ConnIdTransition_PlaceTrasition_ComboBox.DataSource = null;
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void createTable()
         {
+            createColumnCycle();
 
+            foreach (var placeAndTransation in petriNet.PlaceAndTransitionsGrid)
+            {
+                DataGridView.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    Name = placeAndTransation.Key,
+                    HeaderText = placeAndTransation.Key,
+                    Width = 100
+                });
+            }
+
+            DataGridView.Rows.Add((new[] { petriNet.CurrentCycle.ToString() })
+                             .Concat(petriNet.PlaceAndTransitionsGrid.Select(pt => pt.Value))
+                             .ToArray());
         }
 
-        private void label9_Click(object sender, EventArgs e)
+        private void createColumnCycle()
         {
-
+            DataGridView.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Ciclo",
+                Width = 100
+            });
         }
 
-        private void numericUpDown7_ValueChanged(object sender, EventArgs e)
+        private void clear_Button_Click(object sender, EventArgs e)
         {
-
+            clearGrid();
+            clearComponents();
+            petriNet = new PetriNet();
+            createColumnCycle();
         }
 
-        private void label10_Click(object sender, EventArgs e)
+        private void clearGrid()
         {
-
+            DataGridView.Columns.Clear();
+            DataGridView.Rows.Clear();
         }
 
-        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        private void createPlace_Button_Click(object sender, EventArgs e)
         {
+            if (!int.TryParse(IdPlace_TextBox.Text, out var id))
+                return;
 
+            petriNet.CreatePlace(id, Convert.ToInt32(MarkPlace_NumericUpDown.Value));
+
+            drawTable();
+
+            loadTransitionToPlace();
+            laodPlaceToTransition();
+            IdPlace_TextBox.Text = null;
+            MarkPlace_NumericUpDown.Value = 0;
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void createTransition_Button_Click(object sender, EventArgs e)
         {
+            if (!int.TryParse(IdTransition_TextBox.Text, out var id))
+                return;
 
+            petriNet.CreateTransition(id);
+
+            drawTable();
+
+            loadTransitionToPlace();
+            laodPlaceToTransition();
+            IdTransition_TextBox.Text = null;
         }
 
-        private void label7_Click(object sender, EventArgs e)
+        private void connCreate_PlaceTrasition_Button_Click(object sender, EventArgs e)
         {
+            var place = petriNet.GetPlace(Convert.ToInt32(ConnIdPlace_PlaceTrasition_ComboBox.Text));
 
+            if (place == null)
+                return;
+
+            var transition = petriNet.GetTransition(Convert.ToInt32(ConnIdTransition_PlaceTrasition_ComboBox.Text));
+
+            if (transition == null)
+                return;
+
+            var weight = (int)ConnWeight_PlaceTrasition_NumericUpDown.Value;
+            var connType = Enum.Parse<ConnectionType>(ConnType_PlaceTrasition_ComboBox.Text);
+
+            petriNet.CreateConnection(place, transition, weight, connType, ConnectionDirection.Input);
+
+            drawTable();
+            updateConnections();
+
+            ConnWeight_PlaceTrasition_NumericUpDown.Value = 0;
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        private void connCreate_TrasitionPlace_Button_Click(object sender, EventArgs e)
         {
+            var transition = petriNet.GetTransition(Convert.ToInt32(ConnIdTransition_TrasitionPlace_ComboBox.Text));
 
+            if (transition == null)
+                return;
+
+            var place = petriNet.GetPlace(Convert.ToInt32(ConnIdPlace_TrasitionPlace_ComboBox.Text));
+
+            if (place == null)
+                return;            
+
+            var weight = (int)ConnWeight_TrasitionPlace_NumericUpDown.Value;
+
+            petriNet.CreateConnection(place, transition, weight, ConnectionType.Normal, ConnectionDirection.Output);
+
+            drawTable();
+            updateConnections();
+
+            ConnWeight_TrasitionPlace_NumericUpDown.Value = 0;
+        }
+
+        private void runCycle_Button_Click(object sender, EventArgs e)
+        {
+            var exec = petriNet.ExecuteCycle();
+
+            if (!exec)
+            {
+                RunCycle_Button.Enabled = false;
+                MessageBox.Show("Não há mais ciclos de execução", "Simulação finalizada!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            addLastCycle();
+        }
+
+        private void runAllCycle_Button_Click(object sender, EventArgs e)
+        {
+            var exec = true;
+
+            while (exec)
+            {
+                exec = petriNet.ExecuteCycle();
+                if (exec)
+                    addLastCycle();
+            }          
+
+            RunAllCycle_Button.Enabled = false;
+        }
+
+        private void addLastCycle()
+        {
+            DataGridView.Rows.Add((new[] { petriNet.CurrentCycle.ToString() })
+                                         .Concat(petriNet.PlaceAndTransitionsGrid.Select(pt => pt.Value))
+                                         .ToArray());
         }
     }
 }
