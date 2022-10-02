@@ -26,10 +26,10 @@ namespace PetriNets.Controller.Entities
             switch (Direction)
             {
                 case ConnectionDirection.Input:
-                    return $"Lugar {Place?.Id} -> Transição {Transition?.Id} (Tipo {ConnectionTypeName})";
+                    return $"Lugar {Place?.Id} -> Transição {Transition?.Id} - Peso {Weight} - Tipo {ConnectionTypeName}";
 
                 case ConnectionDirection.Output:
-                    return $"Transição {Transition?.Id} -> Lugar {Place?.Id}";
+                    return $"Transição {Transition?.Id} -> Lugar {Place?.Id} - Peso {Weight}";
             }
 
             return "";
