@@ -23,6 +23,12 @@ namespace PetriNets.Controller.Entities.Examples
                 case "Arco Reset":
                     var resetArc = new ResetArc();
                     return resetArc.Load_ResetArc();
+                case "Arco Inibidor":
+                    var inhibitorArc = new InhibitorArc();
+                    return inhibitorArc.Load_InhibitorArc();
+                case "Concorrência":
+                    var concurrence = new Concurrence();
+                    return concurrence.Load_Concurrence();
                 case "Enunciado":
                     var statement = new Statement();
                     return statement.Load_Statement();

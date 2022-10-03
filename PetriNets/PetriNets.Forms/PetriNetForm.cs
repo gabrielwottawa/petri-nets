@@ -40,7 +40,9 @@ namespace PetriNets.Forms
 
             LoadExamples_ComboBox.DataSource = new BindingList<string>(new[] {
                 "",
+                "Arco Inibidor",
                 "Arco Reset",
+                "Concorrência",
                 "Enunciado",
                 "Padrão"
             });

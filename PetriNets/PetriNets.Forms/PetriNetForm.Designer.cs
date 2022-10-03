@@ -170,13 +170,12 @@
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label11.Location = new System.Drawing.Point(18, 885);
+            this.label11.Location = new System.Drawing.Point(18, 878);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(96, 25);
+            this.label11.Size = new System.Drawing.Size(106, 31);
             this.label11.TabIndex = 18;
             this.label11.Text = "Exemplos:";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -189,9 +188,9 @@
             this.LoadExamples_ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.LoadExamples_ComboBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.LoadExamples_ComboBox.FormattingEnabled = true;
-            this.LoadExamples_ComboBox.Location = new System.Drawing.Point(146, 885);
+            this.LoadExamples_ComboBox.Location = new System.Drawing.Point(130, 873);
             this.LoadExamples_ComboBox.Name = "LoadExamples_ComboBox";
-            this.LoadExamples_ComboBox.Size = new System.Drawing.Size(212, 29);
+            this.LoadExamples_ComboBox.Size = new System.Drawing.Size(228, 36);
             this.LoadExamples_ComboBox.TabIndex = 24;
             this.LoadExamples_ComboBox.SelectedIndexChanged += new System.EventHandler(this.LoadExamples_ComboBox_SelectedIndexChanged);
             // 
