@@ -1,5 +1,6 @@
 ﻿using PetriNets.Controller;
 using PetriNets.Controller.Entities;
+using PetriNets.Controller.Entities.Examples;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,6 +29,13 @@ namespace PetriNets.Forms
                 ConnectionType.Normal
                 ,ConnectionType.Inibidor
                 ,ConnectionType.Reset
+            });
+
+            LoadExamples_ComboBox.DataSource = new BindingList<string>(new[] {
+                "Exemplos",
+                "Arco Reset",
+                "Enunciado",
+                "Padrão"
             });
 
             loadPetriNetScreen();
@@ -228,6 +236,15 @@ namespace PetriNets.Forms
             DataGridView.Rows.Add((new[] { petriNet.CurrentCycle.ToString() })
                                          .Concat(petriNet.PlaceAndTransitionsGrid.Select(pt => pt.Value))
                                          .ToArray());
+        }
+
+        private void LoadExamples_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var loadExampleType = LoadExamples_ComboBox.Text;
+            var loadExample = new ExamplesController(loadExampleType);
+            petriNet = loadExample.GetPetriNet();
+
+            loadPetriNetScreen();
         }
     }
 }

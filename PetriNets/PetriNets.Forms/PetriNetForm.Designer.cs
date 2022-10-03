@@ -38,7 +38,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.IdPlace_TextBox = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.LoadExamples_ComboBox = new System.Windows.Forms.ComboBox();
+            this.UploadFile_Button = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.CreateTransition_Button = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -65,9 +66,9 @@
             this.Clear_Button = new System.Windows.Forms.Button();
             this.RunCycle_Button = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.Connections_Label = new System.Windows.Forms.Label();
             this.RunAllCycle_Button = new System.Windows.Forms.Button();
             this.DataGridView = new System.Windows.Forms.DataGridView();
-            this.Connections_Label = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MarkPlace_NumericUpDown)).BeginInit();
             this.groupBox5.SuspendLayout();
@@ -154,7 +155,8 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.button2);
+            this.groupBox5.Controls.Add(this.LoadExamples_ComboBox);
+            this.groupBox5.Controls.Add(this.UploadFile_Button);
             this.groupBox5.Controls.Add(this.groupBox2);
             this.groupBox5.Controls.Add(this.groupBox1);
             this.groupBox5.Controls.Add(this.groupBox6);
@@ -164,18 +166,32 @@
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
             // 
-            // button2
+            // LoadExamples_ComboBox
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.button2.Enabled = false;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button2.Location = new System.Drawing.Point(18, 920);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(340, 39);
-            this.button2.TabIndex = 27;
-            this.button2.Text = "Exemplos";
-            this.button2.UseVisualStyleBackColor = false;
+            this.LoadExamples_ComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LoadExamples_ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.LoadExamples_ComboBox.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LoadExamples_ComboBox.FormattingEnabled = true;
+            this.LoadExamples_ComboBox.Location = new System.Drawing.Point(18, 920);
+            this.LoadExamples_ComboBox.Name = "LoadExamples_ComboBox";
+            this.LoadExamples_ComboBox.Size = new System.Drawing.Size(167, 36);
+            this.LoadExamples_ComboBox.TabIndex = 24;
+            this.LoadExamples_ComboBox.SelectedIndexChanged += new System.EventHandler(this.LoadExamples_ComboBox_SelectedIndexChanged);
+            // 
+            // UploadFile_Button
+            // 
+            this.UploadFile_Button.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.UploadFile_Button.Enabled = false;
+            this.UploadFile_Button.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.UploadFile_Button.ForeColor = System.Drawing.Color.Black;
+            this.UploadFile_Button.Location = new System.Drawing.Point(191, 920);
+            this.UploadFile_Button.Name = "UploadFile_Button";
+            this.UploadFile_Button.Size = new System.Drawing.Size(167, 39);
+            this.UploadFile_Button.TabIndex = 28;
+            this.UploadFile_Button.Text = "Carregar Arquivo";
+            this.UploadFile_Button.UseVisualStyleBackColor = false;
             // 
             // groupBox2
             // 
@@ -484,6 +500,16 @@
             this.groupBox7.TabIndex = 5;
             this.groupBox7.TabStop = false;
             // 
+            // Connections_Label
+            // 
+            this.Connections_Label.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.Connections_Label.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Connections_Label.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Connections_Label.Location = new System.Drawing.Point(6, 19);
+            this.Connections_Label.Name = "Connections_Label";
+            this.Connections_Label.Size = new System.Drawing.Size(1457, 467);
+            this.Connections_Label.TabIndex = 27;
+            // 
             // RunAllCycle_Button
             // 
             this.RunAllCycle_Button.BackColor = System.Drawing.Color.DarkSeaGreen;
@@ -541,16 +567,6 @@
             this.DataGridView.RowTemplate.Height = 25;
             this.DataGridView.Size = new System.Drawing.Size(1457, 423);
             this.DataGridView.TabIndex = 0;
-            // 
-            // Connections_Label
-            // 
-            this.Connections_Label.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.Connections_Label.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Connections_Label.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Connections_Label.Location = new System.Drawing.Point(6, 19);
-            this.Connections_Label.Name = "Connections_Label";
-            this.Connections_Label.Size = new System.Drawing.Size(1457, 467);
-            this.Connections_Label.TabIndex = 27;
             // 
             // PetriNetForm
             // 
@@ -617,8 +633,9 @@
         private DataGridView DataGridView;
         private Button RunCycle_Button;
         private Button Clear_Button;
-        private Button button2;
         private Button RunAllCycle_Button;
         private Label Connections_Label;
+        private Button UploadFile_Button;
+        private ComboBox LoadExamples_ComboBox;
     }
 }
