@@ -1,6 +1,7 @@
 ﻿using PetriNets.Controller;
 using PetriNets.Controller.Entities;
 using PetriNets.Controller.Entities.Examples;
+using PetriNets.Controller.Xml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,11 +17,17 @@ namespace PetriNets.Forms
     public partial class PetriNetForm : Form
     {
         private PetriNet petriNet = new PetriNet();
+        private OpenFileDialog dialog;
 
         public PetriNetForm()
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
+            dialog = new OpenFileDialog()
+            {
+                Filter = "Arquivos de texto (*.txt)|*.txt|Arquivos xml (*.xml)|*.xml|Arquivos pmnl (*.pmnl)|*.pmnl",
+                Title = "Selecionar arquivo"
+            };
         }
 
         private void petriNet_Load(object sender, EventArgs e)
@@ -50,7 +57,7 @@ namespace PetriNets.Forms
             drawTable();
 
             //mostra conexoes da rede
-            updateConnections();                        
+            updateConnections();
         }
 
         private void loadTransitionToPlace()
@@ -116,6 +123,11 @@ namespace PetriNets.Forms
         }
 
         private void clear_Button_Click(object sender, EventArgs e)
+        {
+            clearForm();
+        }
+
+        private void clearForm()
         {
             clearGrid();
             clearComponents();
@@ -191,7 +203,7 @@ namespace PetriNets.Forms
             var place = petriNet.GetPlace(Convert.ToInt32(ConnIdPlace_TrasitionPlace_ComboBox.Text));
 
             if (place == null)
-                return;            
+                return;
 
             var weight = (int)ConnWeight_TrasitionPlace_NumericUpDown.Value;
 
@@ -226,7 +238,7 @@ namespace PetriNets.Forms
                 exec = petriNet.ExecuteCycle();
                 if (exec)
                     addLastCycle();
-            }          
+            }
 
             RunAllCycle_Button.Enabled = false;
         }
@@ -245,6 +257,25 @@ namespace PetriNets.Forms
             petriNet = loadExample.GetPetriNet();
 
             loadPetriNetScreen();
+        }
+
+        private void UploadFile_Button_Click(object sender, EventArgs e)
+        {
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    clearForm();
+                    var xmlHandler = new XmlFilePetriNet(dialog.FileName);
+                    xmlHandler.Load();
+                    petriNet = xmlHandler.PetriNet;
+                    loadPetriNetScreen();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
     }
 }

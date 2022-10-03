@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PetriNets.Controller.Entities.Examples.LoadExamples
+﻿namespace PetriNets.Controller.Entities.Examples.LoadExamples
 {
     public class Pattern
     {
@@ -28,7 +22,7 @@ namespace PetriNets.Controller.Entities.Examples.LoadExamples
         {
             petriNet.Base_CreateConnection(1, 1, 2, ConnectionType.Normal, ConnectionDirection.Input);
             petriNet.Base_CreateConnection(2, 2, 2, ConnectionType.Normal, ConnectionDirection.Input);
-
+            
             petriNet.Base_CreateConnection(2, 1, 2, ConnectionType.Normal, ConnectionDirection.Output);
             petriNet.Base_CreateConnection(3, 2, 2, ConnectionType.Normal, ConnectionDirection.Output);
         }

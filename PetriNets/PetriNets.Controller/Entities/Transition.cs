@@ -13,7 +13,7 @@ namespace PetriNets.Controller.Entities
         public List<Connection> InputConnections = new();
         public List<Connection> OutputConnections = new();
 
-        public Transition(int id) : base(id)
+        public Transition(string id) : base(id)
         {
         }
 

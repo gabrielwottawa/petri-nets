@@ -10,7 +10,7 @@ namespace PetriNets.Controller.Entities
     {
         public int Tokens { get; set; }
 
-        public Place(int id, int tokens) : base(id)
+        public Place(string id, int tokens) : base(id)
         {
             Tokens = tokens;
         }

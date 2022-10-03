@@ -9,13 +9,13 @@ namespace PetriNets.Controller
     public class PetriNet
     {
         public int CurrentCycle { get; private set; } = 0;
-        public List<Place> Places { get; set; } = new();
-        public List<Transition> Transitions { get; set; } = new();
-        public List<Connection> Connections { get; set; } = new();
+        public List<Place> Places { get; private set; } = new();
+        public List<Transition> Transitions { get; private set; } = new();
+        public List<Connection> Connections { get; private set; } = new();
 
         public Dictionary<string, string> PlaceAndTransitionsGrid => getPlaceAndTransitions();
 
-        public bool CreatePlace(int id, int qtyTokens = 0)
+        public bool CreatePlace(string id, int qtyTokens = 0)
         {
             if (GetPlace(id) != null)
                 return false;
@@ -25,9 +25,9 @@ namespace PetriNets.Controller
             return true;
         }
 
-        public Place? GetPlace(int id) => Places.Where(el => el.Id == id).FirstOrDefault();
+        public Place? GetPlace(string id) => Places.Where(el => el.Id == id).FirstOrDefault();
 
-        public bool RemovePlace(int id)
+        public bool RemovePlace(string id)
         {
             var place = GetPlace(id);
             if (place == null)
@@ -37,7 +37,7 @@ namespace PetriNets.Controller
             return true;
         }
 
-        public bool CreateTransition(int id)
+        public bool CreateTransition(string id)
         {
             if (GetTransition(id) != null)
                 return false;
@@ -47,9 +47,9 @@ namespace PetriNets.Controller
             return true;
         }
 
-        public Transition? GetTransition(int id) => Transitions.Where(el => el.Id == id).FirstOrDefault();
+        public Transition? GetTransition(string id) => Transitions.Where(el => el.Id == id).FirstOrDefault();
 
-        public bool RemoveTransition(int id)
+        public bool RemoveTransition(string id)
         {
             var transition = GetTransition(id);
             if (transition == null)
@@ -119,11 +119,11 @@ namespace PetriNets.Controller
 
         public Transition? GetConnectionTransition(Connection connection) => connection.Transition;
 
-        public List<Connection> GetEntryConnections(int id) => GetTransition(id)?.InputConnections ?? new();
+        public List<Connection> GetEntryConnections(string id) => GetTransition(id)?.InputConnections ?? new();
 
-        public List<Connection> GetExitConnections(int id) => GetTransition(id)?.OutputConnections ?? new();
+        public List<Connection> GetExitConnections(string id) => GetTransition(id)?.OutputConnections ?? new();
 
-        public bool AddTokens(int qty, int id)
+        public bool AddTokens(int qty, string id)
         {
             var netPlace = GetPlace(id);
             if (netPlace == null)
@@ -133,7 +133,7 @@ namespace PetriNets.Controller
             return true;
         }
 
-        public bool RemoveTokenFromPlace(int qty, int id)
+        public bool RemoveTokenFromPlace(int qty, string id)
         {
             var netPlace = GetPlace(id);
             if (netPlace == null)
@@ -144,14 +144,14 @@ namespace PetriNets.Controller
         }
 
 
-        public void ClearPlace(int id)
+        public void ClearPlace(string id)
         {
             var place = GetPlace(id);
             if (place != null)
                 place.ConsumeAllTokens();
         }
 
-        public int CountTokens(int id)
+        public int CountTokens(string id)
         {
             var place = GetPlace(id);
             if (place != null)
@@ -160,7 +160,7 @@ namespace PetriNets.Controller
             return 0;
         }
 
-        public bool GetStatusTransition(int id)
+        public bool GetStatusTransition(string id)
         {
             var transition = GetTransition(id);
             if (transition != null)
@@ -201,6 +201,13 @@ namespace PetriNets.Controller
                 builder.AppendLine(connection?.ToString() ?? "");
 
             return builder.ToString();
+        }
+
+        public void LoadNetByFile(List<Place> places, List<Transition> transitions, List<Connection> connections)
+        {
+            Places = places;
+            Transitions = transitions;
+            Connections = connections;
         }
     }
 }
