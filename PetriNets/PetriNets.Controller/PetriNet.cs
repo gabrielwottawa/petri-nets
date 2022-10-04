@@ -1,4 +1,5 @@
 ﻿using PetriNets.Controller.Entities;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -11,7 +12,7 @@ namespace PetriNets.Controller
         public int CurrentCycle { get; private set; } = 0;
         public List<Place> Places { get; private set; } = new();
         public List<Transition> Transitions { get; private set; } = new();
-        public List<Connection> Connections { get; private set; } = new();
+        public List<Connection> Connections { get; private set; } = new();        
 
         public Dictionary<string, string> PlaceAndTransitionsGrid => getPlaceAndTransitions();
 
@@ -178,8 +179,8 @@ namespace PetriNets.Controller
 
             foreach (var transition in transitions)
             {
-                while (transition.IsEnabled)
-                    transition.ExecuteTransition();
+                while (transition.IsEnabled)                                    
+                    transition.ExecuteTransition();                
             }
 
             CurrentCycle++;

@@ -2,14 +2,9 @@
 using PetriNets.Controller.Entities;
 using PetriNets.Controller.Entities.Examples;
 using PetriNets.Controller.Xml;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace PetriNets.Forms
@@ -25,9 +20,12 @@ namespace PetriNets.Forms
             this.WindowState = FormWindowState.Maximized;
             dialog = new OpenFileDialog()
             {
-                Filter = "Arquivos de texto (*.txt)|*.txt|Arquivos xml (*.xml)|*.xml|Arquivos pmnl (*.pmnl)|*.pmnl",
+                Filter = "Arquivos de texto (*.txt)|*.txt|" +
+                         "Arquivos xml (*.xml)|*.xml|" +
+                         "Arquivos pmnl (*.pmnl)|*.pmnl|" +
+                         "Arquivos pflow (*.pflow)|*.pflow",
                 Title = "Selecionar arquivo"
-            };
+            };            
         }
 
         private void petriNet_Load(object sender, EventArgs e)
@@ -145,10 +143,7 @@ namespace PetriNets.Forms
 
         private void createPlace_Button_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(IdPlace_TextBox.Text, out var id))
-                return;
-
-            petriNet.CreatePlace(id, Convert.ToInt32(MarkPlace_NumericUpDown.Value));
+            petriNet.CreatePlace(IdPlace_TextBox.Text, Convert.ToInt32(MarkPlace_NumericUpDown.Value));
 
             drawTable();
 
@@ -160,10 +155,7 @@ namespace PetriNets.Forms
 
         private void createTransition_Button_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(IdTransition_TextBox.Text, out var id))
-                return;
-
-            petriNet.CreateTransition(id);
+            petriNet.CreateTransition(IdTransition_TextBox.Text);
 
             drawTable();
 
@@ -174,12 +166,12 @@ namespace PetriNets.Forms
 
         private void connCreate_PlaceTrasition_Button_Click(object sender, EventArgs e)
         {
-            var place = petriNet.GetPlace(Convert.ToInt32(ConnIdPlace_PlaceTrasition_ComboBox.Text));
+            var place = petriNet.GetPlace(ConnIdPlace_PlaceTrasition_ComboBox.Text);
 
             if (place == null)
                 return;
 
-            var transition = petriNet.GetTransition(Convert.ToInt32(ConnIdTransition_PlaceTrasition_ComboBox.Text));
+            var transition = petriNet.GetTransition(ConnIdTransition_PlaceTrasition_ComboBox.Text);
 
             if (transition == null)
                 return;
@@ -197,12 +189,12 @@ namespace PetriNets.Forms
 
         private void connCreate_TrasitionPlace_Button_Click(object sender, EventArgs e)
         {
-            var transition = petriNet.GetTransition(Convert.ToInt32(ConnIdTransition_TrasitionPlace_ComboBox.Text));
+            var transition = petriNet.GetTransition(ConnIdTransition_TrasitionPlace_ComboBox.Text);
 
             if (transition == null)
                 return;
 
-            var place = petriNet.GetPlace(Convert.ToInt32(ConnIdPlace_TrasitionPlace_ComboBox.Text));
+            var place = petriNet.GetPlace(ConnIdPlace_TrasitionPlace_ComboBox.Text);
 
             if (place == null)
                 return;
@@ -234,12 +226,20 @@ namespace PetriNets.Forms
         private void runAllCycle_Button_Click(object sender, EventArgs e)
         {
             var exec = true;
+            var stopWatch = Stopwatch.StartNew();
 
             while (exec)
             {
                 exec = petriNet.ExecuteCycle();
                 if (exec)
                     addLastCycle();
+
+                if (stopWatch.Elapsed.TotalSeconds > 5)
+                {
+                    stopWatch.Stop();
+                    MessageBox.Show("O programa entrou em um laço infinito!", "Limite de Execuções Atingido", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+                    break;
+                }
             }
 
             RunAllCycle_Button.Enabled = false;
@@ -248,8 +248,13 @@ namespace PetriNets.Forms
         private void addLastCycle()
         {
             DataGridView.Rows.Add((new[] { petriNet.CurrentCycle.ToString() })
-                                         .Concat(petriNet.PlaceAndTransitionsGrid.Select(pt => pt.Value))
-                                         .ToArray());
+                             .Concat(petriNet.PlaceAndTransitionsGrid.Select(pt => pt.Value))
+                             .ToArray());
+
+            DataGridView.Refresh();
+            var lastRow = DataGridView.Rows.GetLastRow(DataGridViewElementStates.Displayed);            
+            DataGridView.CurrentCell = DataGridView.Rows[lastRow].Cells[0];
+            DataGridView.FirstDisplayedScrollingRowIndex = lastRow;
         }
 
         private void LoadExamples_ComboBox_SelectedIndexChanged(object sender, EventArgs e)

@@ -8,7 +8,7 @@ namespace PetriNets.Controller.Entities.Examples.LoadExamples
 {
     public static class BaseLoadExamples
     {
-        public static void Base_CreateConnection(this PetriNet petriNet, int id_place, int id_transition, int weight, ConnectionType connectionType, ConnectionDirection connectionDirection)
+        public static void Base_CreateConnection(this PetriNet petriNet, string id_place, string id_transition, int weight, ConnectionType connectionType, ConnectionDirection connectionDirection)
         {
             var place = petriNet.GetPlace(id_place);
 

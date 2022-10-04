@@ -173,7 +173,7 @@
             this.label11.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label11.Location = new System.Drawing.Point(18, 878);
+            this.label11.Location = new System.Drawing.Point(18, 883);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(106, 31);
             this.label11.TabIndex = 18;
@@ -188,9 +188,9 @@
             this.LoadExamples_ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.LoadExamples_ComboBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.LoadExamples_ComboBox.FormattingEnabled = true;
-            this.LoadExamples_ComboBox.Location = new System.Drawing.Point(130, 873);
+            this.LoadExamples_ComboBox.Location = new System.Drawing.Point(130, 885);
             this.LoadExamples_ComboBox.Name = "LoadExamples_ComboBox";
-            this.LoadExamples_ComboBox.Size = new System.Drawing.Size(228, 36);
+            this.LoadExamples_ComboBox.Size = new System.Drawing.Size(228, 29);
             this.LoadExamples_ComboBox.TabIndex = 24;
             this.LoadExamples_ComboBox.SelectedIndexChanged += new System.EventHandler(this.LoadExamples_ComboBox_SelectedIndexChanged);
             // 
@@ -522,7 +522,7 @@
             this.Connections_Label.Location = new System.Drawing.Point(6, 19);
             this.Connections_Label.Name = "Connections_Label";
             this.Connections_Label.Size = new System.Drawing.Size(1457, 467);
-            this.Connections_Label.TabIndex = 27;
+            this.Connections_Label.TabIndex = 27;            
             // 
             // RunAllCycle_Button
             // 
@@ -598,7 +598,6 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MarkPlace_NumericUpDown)).EndInit();
             this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox6.ResumeLayout(false);
