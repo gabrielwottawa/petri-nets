@@ -12,9 +12,11 @@ namespace PetriNets.Controller.Entities
 
         public List<Connection> InputConnections = new();
         public List<Connection> OutputConnections = new();
+        private Action<Transition>? actionAfterExecution;
 
-        public Transition(string id) : base(id)
+        public Transition(string id, Action<Transition>? actionAfterExecution = null) : base(id)
         {
+            this.actionAfterExecution = actionAfterExecution;
         }
 
         public void ExecuteTransition()
@@ -24,6 +26,8 @@ namespace PetriNets.Controller.Entities
 
             foreach (var connection in OutputConnections)
                 connection.Place?.ProduceToken(connection.Weight);
+
+            actionAfterExecution?.Invoke(this);
         }
 
         private bool tokenIsEnabled() => InputConnections.Any() && InputConnections.All(el => el.IsEnabled);

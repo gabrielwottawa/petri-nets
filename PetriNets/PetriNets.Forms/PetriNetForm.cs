@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
+using static System.Windows.Forms.ListView;
 
 namespace PetriNets.Forms
 {
@@ -25,7 +26,18 @@ namespace PetriNets.Forms
                          "Arquivos pmnl (*.pmnl)|*.pmnl|" +
                          "Arquivos pflow (*.pflow)|*.pflow",
                 Title = "Selecionar arquivo"
-            };            
+            };
+            adjustListView();
+        }
+
+        private void adjustListView()
+        {
+            var header = new ColumnHeader();
+            header.Text = "";
+            header.Name = "col1";
+            header.Width = ListView.Width - ListView.Margin.Right - ListView.Margin.Left - SystemInformation.VerticalScrollBarWidth;
+            ListView.Columns.Add(header);
+            ListView.HeaderStyle = ColumnHeaderStyle.None;
         }
 
         private void petriNet_Load(object sender, EventArgs e)
@@ -74,7 +86,14 @@ namespace PetriNets.Forms
 
         private void updateConnections()
         {
-            Connections_Label.Text = petriNet.GetConnectionsInfo();
+            ListView.Items.Clear();
+            var listViewItems = new ListViewItemCollection(ListView);
+            foreach (var connection in petriNet.GetConnectionsInfo())
+            {
+                var item = new ListViewItem(connection);
+                listViewItems.Add(item);
+            }
+
             RunCycle_Button.Enabled = true;
             RunAllCycle_Button.Enabled = true;
         }
@@ -87,7 +106,7 @@ namespace PetriNets.Forms
 
         private void clearComponents()
         {
-            Connections_Label.Text = " ";
+            ListView.Items.Clear();
             ConnIdPlace_PlaceTrasition_ComboBox.DataSource = null;
             ConnIdTransition_TrasitionPlace_ComboBox.DataSource = null;
             ConnIdPlace_TrasitionPlace_ComboBox.DataSource = null;
@@ -237,7 +256,7 @@ namespace PetriNets.Forms
                 if (stopWatch.Elapsed.TotalSeconds > 5)
                 {
                     stopWatch.Stop();
-                    MessageBox.Show("O programa entrou em um laço infinito!", "Limite de Execuções Atingido", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+                    MessageBox.Show("O programa entrou em um laço infinito!", "Limite de Execuções Atingido", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 }
             }
@@ -252,7 +271,7 @@ namespace PetriNets.Forms
                              .ToArray());
 
             DataGridView.Refresh();
-            var lastRow = DataGridView.Rows.GetLastRow(DataGridViewElementStates.Displayed);            
+            var lastRow = DataGridView.Rows.GetLastRow(DataGridViewElementStates.Displayed);
             DataGridView.CurrentCell = DataGridView.Rows[lastRow].Cells[0];
             DataGridView.FirstDisplayedScrollingRowIndex = lastRow;
         }
@@ -283,6 +302,13 @@ namespace PetriNets.Forms
                     MessageBox.Show(ex.Message);
                 }
             }
+        }
+
+        private void ListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var listView = (ListView)sender;
+            var item = listView.FocusedItem;
+            item.Selected = false;
         }
     }
 }

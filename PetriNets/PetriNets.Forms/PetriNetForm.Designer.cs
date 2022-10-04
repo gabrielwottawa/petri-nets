@@ -67,7 +67,7 @@
             this.Clear_Button = new System.Windows.Forms.Button();
             this.RunCycle_Button = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.Connections_Label = new System.Windows.Forms.Label();
+            this.ListView = new System.Windows.Forms.ListView();
             this.RunAllCycle_Button = new System.Windows.Forms.Button();
             this.DataGridView = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
@@ -503,7 +503,7 @@
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.Connections_Label);
+            this.groupBox7.Controls.Add(this.ListView);
             this.groupBox7.Controls.Add(this.RunAllCycle_Button);
             this.groupBox7.Controls.Add(this.RunCycle_Button);
             this.groupBox7.Controls.Add(this.Clear_Button);
@@ -514,15 +514,17 @@
             this.groupBox7.TabIndex = 5;
             this.groupBox7.TabStop = false;
             // 
-            // Connections_Label
+            // ListView
             // 
-            this.Connections_Label.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.Connections_Label.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Connections_Label.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Connections_Label.Location = new System.Drawing.Point(6, 19);
-            this.Connections_Label.Name = "Connections_Label";
-            this.Connections_Label.Size = new System.Drawing.Size(1457, 467);
-            this.Connections_Label.TabIndex = 27;            
+            this.ListView.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.ListView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ListView.Location = new System.Drawing.Point(6, 19);
+            this.ListView.Name = "ListView";
+            this.ListView.Size = new System.Drawing.Size(1457, 464);
+            this.ListView.TabIndex = 27;
+            this.ListView.UseCompatibleStateImageBehavior = false;
+            this.ListView.View = System.Windows.Forms.View.Details;
+            this.ListView.SelectedIndexChanged += new System.EventHandler(this.ListView_SelectedIndexChanged);
             // 
             // RunAllCycle_Button
             // 
@@ -648,9 +650,9 @@
         private Button RunCycle_Button;
         private Button Clear_Button;
         private Button RunAllCycle_Button;
-        private Label Connections_Label;
         private Button UploadFile_Button;
         private ComboBox LoadExamples_ComboBox;
         private Label label11;
+        private ListView ListView;
     }
 }

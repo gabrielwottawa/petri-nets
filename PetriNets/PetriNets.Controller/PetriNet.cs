@@ -16,12 +16,12 @@ namespace PetriNets.Controller
 
         public Dictionary<string, string> PlaceAndTransitionsGrid => getPlaceAndTransitions();
 
-        public bool CreatePlace(string id, int qtyTokens = 0)
+        public bool CreatePlace(string id, int qtyTokens = 0, Action<Place>? actionProducedToken = null, Action<Place>? actionConsumedToken = null)
         {
             if (GetPlace(id) != null)
                 return false;
 
-            var place = new Place(id, qtyTokens);
+            var place = new Place(id, qtyTokens, actionProducedToken, actionConsumedToken);
             Places.Add(place);
             return true;
         }
@@ -38,12 +38,12 @@ namespace PetriNets.Controller
             return true;
         }
 
-        public bool CreateTransition(string id)
+        public bool CreateTransition(string id, Action<Transition>? actionAfterExecution = null)
         {
             if (GetTransition(id) != null)
                 return false;
 
-            var transition = new Transition(id);
+            var transition = new Transition(id, actionAfterExecution);
             Transitions.Add(transition);
             return true;
         }
@@ -195,13 +195,13 @@ namespace PetriNets.Controller
             return places.Concat(transitions).ToDictionary(el => el.Key, el => el.Value);
         }
 
-        public string GetConnectionsInfo()
+        public List<string> GetConnectionsInfo()
         {
-            var builder = new StringBuilder();
+            var connections = new List<string>();
             foreach (var connection in Connections)
-                builder.AppendLine(connection?.ToString() ?? "");
+                connections.Add(connection?.ToString() ?? "");
 
-            return builder.ToString();
+            return connections;
         }
 
         public void LoadNetByFile(List<Place> places, List<Transition> transitions, List<Connection> connections)

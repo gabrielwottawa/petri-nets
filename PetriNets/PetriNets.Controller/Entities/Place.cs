@@ -10,9 +10,14 @@ namespace PetriNets.Controller.Entities
     {
         public int Tokens { get; set; }
 
-        public Place(string id, int tokens) : base(id)
+        private Action<Place>? actionProducedToken;
+        private Action<Place>? actionConsumedToken;
+
+        public Place(string id, int tokens, Action<Place>? actionProducedToken, Action<Place>? actionConsumedToken) : base(id)
         {
             Tokens = tokens;
+            this.actionProducedToken = actionProducedToken;
+            this.actionConsumedToken = actionConsumedToken;
         }
 
         public void ConsumeToken(int quantity)
@@ -21,6 +26,7 @@ namespace PetriNets.Controller.Entities
                 throw new InvalidOperationException($"Erro ao consumir marcas. Valor maior que o disponível de {Tokens}");
 
             Tokens -= quantity;
+            actionConsumedToken?.Invoke(this);
         }
 
         public void ConsumeAllTokens() => ConsumeToken(Tokens);
@@ -28,6 +34,7 @@ namespace PetriNets.Controller.Entities
         public void ProduceToken(int quantity)
         {
             Tokens += quantity;
+            actionProducedToken?.Invoke(this);
         }
     }
 }
