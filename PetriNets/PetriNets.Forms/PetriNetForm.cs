@@ -54,7 +54,8 @@ namespace PetriNets.Forms
                 "Arco Reset",
                 "Concorrência",
                 "Enunciado",
-                "Padrão"
+                "Padrão",
+                "Rede Referência TA"
             });
 
             loadPetriNetScreen();
@@ -162,6 +163,20 @@ namespace PetriNets.Forms
 
         private void createPlace_Button_Click(object sender, EventArgs e)
         {
+            if (verifyIdEmpty(IdPlace_TextBox.Text))
+            {
+                showMessageBox("Identificador não pode ser vazio!", "Criação não concluída");
+                return;
+            }
+
+            var placeID = petriNet.GetPlace(IdPlace_TextBox.Text);
+
+            if (placeID != null && placeID.Id.Any())
+            {
+                showMessageBox("Identificador já existe!", "Criação não concluída");
+                return;
+            }
+
             petriNet.CreatePlace(IdPlace_TextBox.Text, Convert.ToInt32(MarkPlace_NumericUpDown.Value));
 
             drawTable();
@@ -172,8 +187,26 @@ namespace PetriNets.Forms
             MarkPlace_NumericUpDown.Value = 0;
         }
 
+        private static void showMessageBox(string text, string caption) => MessageBox.Show(text, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        private bool verifyIdEmpty(string id) => string.IsNullOrEmpty(id) || string.IsNullOrWhiteSpace(id);
+
         private void createTransition_Button_Click(object sender, EventArgs e)
         {
+            if (verifyIdEmpty(IdTransition_TextBox.Text))
+            {
+                showMessageBox("Identificador não pode ser vazio!", "Criação não concluída");
+                return;
+            }
+
+            var transitionID = petriNet.GetTransition(IdTransition_TextBox.Text);
+
+            if (transitionID != null && transitionID.Id.Any())
+            {
+                showMessageBox("Identificador já existe!", "Criação não concluída");
+                return;
+            }
+
             petriNet.CreateTransition(IdTransition_TextBox.Text);
 
             drawTable();
@@ -235,7 +268,8 @@ namespace PetriNets.Forms
             if (!exec)
             {
                 RunCycle_Button.Enabled = false;
-                MessageBox.Show("Não há mais ciclos de execução", "Simulação finalizada!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                RunAllCycle_Button.Enabled = false;
+                showMessageBox("Não há mais ciclos de execução.", "Simulação finalizada");
                 return;
             }
 
@@ -256,12 +290,13 @@ namespace PetriNets.Forms
                 if (stopWatch.Elapsed.TotalSeconds > 5)
                 {
                     stopWatch.Stop();
-                    MessageBox.Show("O programa entrou em um laço infinito!", "Limite de Execuções Atingido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    showMessageBox("O programa entrou em um laço infinito!", "Limite de Execuções Atingido");
                     break;
                 }
             }
 
             RunAllCycle_Button.Enabled = false;
+            RunCycle_Button.Enabled = false;
         }
 
         private void addLastCycle()

@@ -35,6 +35,9 @@ namespace PetriNets.Controller.Entities.Examples
                 case "Padrão":
                     var patter = new Pattern();
                     return patter.Load_Pattern();
+                case "Rede Referência TA":
+                    var referenceNetTA = new ReferenceNetTA();
+                    return referenceNetTA.Load_ReferenceNetTA();
             }
 
             return new PetriNet();
